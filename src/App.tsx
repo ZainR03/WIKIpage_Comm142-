@@ -15,17 +15,31 @@ import {
   Wind,
   Clock,
   ExternalLink,
-  GraduationCap
+  GraduationCap,
+  AlertCircle,
+  Moon,
+  Activity,
+  Smartphone,
+  CheckCircle2,
+  HelpCircle
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 
-type Section = "wiki" | "audience" | "research" | "team-roles" | "reflection";
+type Section = "identifying" | "coping" | "audience" | "research" | "team-roles" | "reflection";
+
+const SLEEP_DATA = [
+  { name: '6 hours or less', value: 55, color: '#F76902' },
+  { name: '7 hours', value: 25, color: '#5A5A40' },
+  { name: '8+ hours', value: 20, color: '#e3e3d8' },
+];
 
 export default function App() {
-  const [activeSection, setActiveSection] = useState<Section>("wiki");
+  const [activeSection, setActiveSection] = useState<Section>("identifying");
 
   const menuItems = [
-    { id: "wiki", label: "Wiki Content", icon: BookOpen },
+    { id: "identifying", label: "Identifying Stress", icon: BookOpen },
+    { id: "coping", label: "Coping Strategies", icon: Wind },
     { id: "audience", label: "Audience Analysis", icon: GraduationCap },
     { id: "research", label: "Research & Sources", icon: Search },
     { id: "team-roles", label: "Team Roles", icon: Users },
@@ -65,7 +79,7 @@ export default function App() {
           {/* Left Sidebar Navigation */}
           <aside className="col-span-12 lg:col-span-3 flex flex-col gap-8 sticky top-8">
             <section>
-              <h3 className="text-[11px] uppercase tracking-[0.15em] font-bold text-[#8a8a70] mb-4">Wiki Navigation</h3>
+              <h3 className="text-[11px] uppercase tracking-[0.15em] font-bold text-[#8a8a70] mb-4">Wiki Content</h3>
               <nav className="flex flex-col gap-2">
                 {menuItems.map((item) => (
                   <button
@@ -78,13 +92,14 @@ export default function App() {
                     }`}
                   >
                     <span className={`w-1.5 h-1.5 rounded-full transition-all ${activeSection === item.id ? "bg-natural-primary" : "bg-transparent"}`}></span>
+                    <item.icon className="w-4 h-4" />
                     {item.label}
                   </button>
                 ))}
               </nav>
             </section>
 
-            <div className="mt-4 p-6 bg-natural-sidebar rounded-3xl border border-natural-border/30">
+            <div className="mt-4 p-6 bg-natural-sidebar rounded-3xl border border-natural-border/30 shadow-sm">
               <p className="text-xs text-[#6b6b54] mb-4 leading-relaxed font-medium">
                 Feeling overwhelmed? Our RIT peer support line is open until midnight for all students.
               </p>
@@ -95,13 +110,13 @@ export default function App() {
           </aside>
 
           {/* Main Article Content */}
-          <main className="col-span-12 lg:col-span-6 bg-white rounded-[40px] p-10 shadow-sm border border-[#ececea] flex flex-col min-h-[700px]">
-            <div className="flex items-center gap-3 mb-6">
+          <main className="col-span-12 lg:col-span-9 bg-white rounded-[40px] p-10 shadow-sm border border-[#ececea] flex flex-col min-h-[800px]">
+             <div className="flex items-center gap-3 mb-6">
               <span className="text-[10px] bg-natural-bg text-[#8a8a70] px-3 py-1 rounded-md uppercase font-bold tracking-wider border border-natural-border/20 shadow-sm">
-                Last updated: {new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
+                Technical Communication Wiki
               </span>
               <span className="text-[10px] bg-natural-accent text-[#5A5A40] px-3 py-1 rounded-md uppercase font-bold tracking-wider">
-                LO CHECKED
+                Ver. 2.0
               </span>
             </div>
 
@@ -109,12 +124,13 @@ export default function App() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeSection}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 10 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
                 >
-                  {activeSection === "wiki" && <WikiContent />}
+                  {activeSection === "identifying" && <IdentifyingStress />}
+                  {activeSection === "coping" && <CopingStrategies />}
                   {activeSection === "audience" && <AudienceAnalysis />}
                   {activeSection === "research" && <ResearchSection />}
                   {activeSection === "team-roles" && <TeamRoles />}
@@ -125,80 +141,25 @@ export default function App() {
 
             <div className="mt-12 pt-8 border-t border-[#f0f0e8] flex flex-wrap gap-4 justify-between items-center">
               <div className="flex items-center gap-3">
-                <div className="flex -space-x-2">
-                  <div className="w-8 h-8 rounded-full border-2 border-white bg-slate-200"></div>
-                  <div className="w-8 h-8 rounded-full border-2 border-white bg-slate-300"></div>
-                  <div className="w-8 h-8 rounded-full border-2 border-white bg-slate-400"></div>
-                </div>
-                <span className="text-[10px] text-[#8a8a70] font-bold uppercase tracking-tight">Edited by 4 students</span>
+                <span className="text-[10px] text-[#8a8a70] font-bold uppercase tracking-tight">Technical Reference: COMM 142</span>
               </div>
               <button className="flex items-center gap-2 text-xs font-bold text-natural-primary group">
-                View Full Changelog 
+                Contribution Activity
                 <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </main>
-
-          {/* Right Context Panel */}
-          <aside className="col-span-12 lg:col-span-3 flex flex-col gap-6 sticky top-8">
-            <div className="bg-natural-accent rounded-[32px] p-6 border border-natural-primary/5">
-              <h4 className="text-sm font-serif font-bold text-natural-heading mb-6">Quick Tools</h4>
-              <div className="grid grid-cols-2 gap-4">
-                <button className="bg-white rounded-2xl p-4 flex flex-col items-center gap-3 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
-                  <div className="w-10 h-10 rounded-full bg-natural-bg flex items-center justify-center">
-                    <Wind className="w-5 h-5 text-natural-primary" />
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wide">Breathe</span>
-                </button>
-                <button className="bg-white rounded-2xl p-4 flex flex-col items-center gap-3 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
-                  <div className="w-10 h-10 rounded-full bg-natural-bg flex items-center justify-center">
-                    <Clock className="w-5 h-5 text-natural-primary" />
-                  </div>
-                  <span className="text-[10px] font-bold uppercase tracking-wide">Study Timer</span>
-                </button>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-[32px] p-8 border border-[#ececea] flex-1 shadow-sm">
-              <h4 className="text-sm font-serif font-bold text-natural-heading mb-6">Support Resources</h4>
-              <ul className="space-y-6">
-                {[
-                  { title: "Counseling Portal", source: "RIT University Admin", link: "#" },
-                  { title: "Exam Anxiety Lab", source: "PDF Guide, 2.4 MB", link: "#" },
-                  { title: "Sleep Hygiene", source: "Interactive Checklist", link: "#" }
-                ].map((res, i) => (
-                  <li key={i} className="flex flex-col group">
-                    <a href={res.link} className="text-xs text-natural-primary underline underline-offset-4 decoration-natural-primary/30 font-bold group-hover:decoration-natural-primary transition-all">
-                      {res.title}
-                    </a>
-                    <span className="text-[10px] text-[#8a8a70] mt-1 font-medium">{res.source}</span>
-                  </li>
-                ))}
-              </ul>
-              
-              <div className="mt-12 pt-8 border-t border-natural-bg">
-                <h4 className="text-[10px] uppercase font-bold text-[#8a8a70] tracking-[0.2em] mb-6">Related Tags</h4>
-                <div className="flex flex-wrap gap-2">
-                  {["Academics", "Self-Care", "Peer-Help", "Hydration", "Focus"].map(tag => (
-                    <span key={tag} className="bg-natural-bg px-3 py-1.5 rounded-lg text-[10px] font-bold text-[#8a8a70] border border-natural-border/20">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </aside>
         </div>
 
         {/* Footer */}
         <footer className="mt-8 flex flex-col md:flex-row justify-between items-center px-4 py-8 border-t border-natural-border/20 gap-6">
           <div className="flex flex-wrap justify-center gap-8 text-[10px] font-bold text-[#8a8a70] uppercase tracking-widest">
-            <span>© 2026 RIT Student Support</span>
-            <span className="hover:text-natural-primary cursor-pointer transition-colors">Terms</span>
-            <span className="hover:text-natural-primary cursor-pointer transition-colors">Privacy</span>
+            <span>© 2026 RIT Dubai Wiki project</span>
+            <span>Technical Communication</span>
+            <span>Stress Management</span>
           </div>
           <div className="text-xs text-natural-primary italic font-serif opacity-80 max-w-sm text-center md:text-right leading-relaxed">
-            "Rest is not idleness, and to lie sometimes on the grass... is by no means a waste of time."
+            "Prioritizing mental health is the first step toward academic excellence."
           </div>
         </footer>
       </div>
@@ -206,46 +167,189 @@ export default function App() {
   );
 }
 
-function WikiContent() {
+function IdentifyingStress() {
   return (
     <>
-      <h1 className="mb-8">Mental Health & Stress Management</h1>
+      <h1 className="mb-8">Mental Health & Stress Management for Students</h1>
       
-      <p className="text-lg leading-relaxed text-[#5d5d4d] mb-10 italic">
-        Building resilience is not about eliminating stress, but about developing the cognitive tools to navigate the rigors of technical education at RIT.
+      <h2>Introduction</h2>
+      <p>
+        Stress is a common experience among university students caused by academic pressure, deadlines, and personal responsibilities. While some stress can improve performance, excessive stress can negatively affect both mental and physical health.
       </p>
 
-      <div className="space-y-6 my-12">
-        {[
-          { icon: Brain, title: "Step 01: The 20-Minute Focus Rule", desc: "Study in concentrated blocks to prevent mental fatigue and cortisol spikes. Follow with a 5-minute movement break." },
-          { icon: Layout, title: "Step 02: Environmental Auditing", desc: "Regularly changing study locations—from the library to the student lounge—can reduce the feeling of being 'stuck'." },
-          { icon: Users, title: "Step 03: Social Anchoring", desc: "Maintain at least two non-academic social activities per week to regulate neurochemical mood balance." }
-        ].map((step, i) => (
-          <div key={i} className="flex gap-6 p-6 rounded-3xl bg-natural-bg/30 border border-natural-border/10 group hover:bg-natural-accent hover:border-natural-primary/5 transition-all">
-            <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-natural-primary shadow-sm group-hover:scale-110 transition-transform">
-              <step.icon className="w-6 h-6" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
+        <div className="p-6 bg-natural-sidebar rounded-3xl border border-natural-border/20">
+          <h3 className="text-sm font-serif font-bold text-natural-heading mb-4 flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 text-rit-orange" /> Causes of Stress
+          </h3>
+          <ul className="text-xs space-y-2 list-none p-0">
+            <li className="flex items-start gap-2">
+              <span className="w-1.5 h-1.5 bg-natural-primary rounded-full mt-1.5 shrink-0"></span>
+              <span>Academic workload</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="w-1.5 h-1.5 bg-natural-primary rounded-full mt-1.5 shrink-0"></span>
+              <span>Exams and deadlines</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="w-1.5 h-1.5 bg-natural-primary rounded-full mt-1.5 shrink-0"></span>
+              <span>Poor sleep habits</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="w-1.5 h-1.5 bg-natural-primary rounded-full mt-1.5 shrink-0"></span>
+              <span>Time management issues</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="w-1.5 h-1.5 bg-natural-primary rounded-full mt-1.5 shrink-0"></span>
+              <span>High performance expectations</span>
+            </li>
+          </ul>
+        </div>
+
+        <div className="p-6 bg-natural-accent rounded-3xl border border-natural-primary/10">
+          <h3 className="text-sm font-serif font-bold text-natural-heading mb-4 flex items-center gap-2">
+            <Activity className="w-4 h-4 text-natural-primary" /> Effects of Stress
+          </h3>
+          <div className="space-y-4">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-natural-primary">Mental Effects</span>
+              <p className="text-xs m-0">Anxiety, reduced concentration, and burnout.</p>
             </div>
             <div>
-              <h4 className="font-serif font-bold text-natural-heading mb-1">{step.title}</h4>
-              <p className="text-xs text-[#6b6b54] leading-relaxed m-0">{step.desc}</p>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-natural-primary">Physical Effects</span>
+              <p className="text-xs m-0">Fatigue, headaches, and sleep deprivation.</p>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>Sleep and Academic Stress</h2>
+      <p>
+        Research indicates a strong link between sleep patterns and academic stress. According to student data, the majority of students do not meet the recommended sleep requirements.
+      </p>
+      <p>
+        A study by <strong>Steinthal (2016)</strong> shows that:
+      </p>
+      <ul>
+        <li><strong>55%</strong> of students sleep 6 hours or less per night.</li>
+        <li>Only a small percentage achieve recommended sleep levels.</li>
+        <li>Sleep deprivation increases stress, anxiety, and reduces academic performance.</li>
+      </ul>
+
+      <div className="my-12 p-8 bg-white border border-natural-border/30 rounded-[32px] shadow-sm flex flex-col items-center">
+        <h4 className="text-sm font-serif font-bold text-natural-heading mb-2">Figure 1: Student Sleep Patterns</h4>
+        <div className="w-full h-[300px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={SLEEP_DATA}
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={100}
+                paddingAngle={5}
+                dataKey="value"
+              >
+                {SLEEP_DATA.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip 
+                contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+              />
+              <Legend verticalAlign="bottom" height={36}/>
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+        <p className="text-[10px] text-[#8a8a70] italic text-center max-w-md mt-4">
+          Figure 1: Distribution of sleep duration among students, showing that most students sleep fewer hours than recommended, which may contribute to higher stress levels.
+        </p>
+      </div>
+
+      <h2>Conclusion</h2>
+      <p>
+        Stress is a common but manageable part of student life. With proper sleep, time management, and support systems, students can significantly improve both their mental health and academic performance.
+      </p>
+    </>
+  );
+}
+
+function CopingStrategies() {
+  const strategies = [
+    {
+      title: "Time Management",
+      icon: Clock,
+      content: "The biggest cause of stress is deadline pressure. Practical tips include breaking large tasks into smaller steps, using a weekly planner, and the 2-hour study rule (focused study with breaks)."
+    },
+    {
+      title: "Breathing & Relaxation",
+      icon: Wind,
+      content: "Reset your nervous system with the 4-7-8 method (Inhale 4s, Hold 7s, Exhale 8s) or Box Breathing (4-4-4-4). Just 5-10 minutes of daily mediation improves focus."
+    },
+    {
+      title: "Sleep Management",
+      icon: Moon,
+      content: "Aim for 7–9 hours. Avoid screens 60 mins before bed and keep a consistent schedule. Poor sleep directly increases anxiety and reduces concentration."
+    },
+    {
+      title: "Physical Activity",
+      icon: Activity,
+      content: "Exercise releases endorphins. Walking for 20 minutes or light stretching between study sessions are natural stress reducers."
+    },
+    {
+      title: "Digital Overload",
+      icon: Smartphone,
+      content: "Reduce screen time to fight mental fatigue. Use 'Do Not Disturb' during sessions and avoid multitasking with your phone while studying."
+    },
+    {
+      title: "Seek Support",
+      icon: Users,
+      content: "Don't handle it alone. Talk to friends, family, or RIT counseling services. Talking about stress reduces emotional pressure significantly."
+    },
+    {
+      title: "Healthy Study Habits",
+      icon: CheckCircle2,
+      content: "Use active recall (testing yourself) and the Pomodoro technique (25m study / 5m break). Avoid cramming; regular review prevents last-minute panic."
+    },
+    {
+      title: "Mindset & Awareness",
+      icon: Brain,
+      content: "Aim for progress, not perfection. Mistakes are part of learning. Avoid comparing yourself to others and focus on what you can control."
+    }
+  ];
+
+  return (
+    <>
+      <h1>Stress Management Strategies for Students</h1>
+      <p className="mb-10 text-lg text-natural-primary/70">
+        Empowering yourself with the right tools is essential for maintaining balance during high-pressure academic cycles.
+      </p>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        {strategies.map((s, i) => (
+          <div key={i} className="p-6 rounded-3xl bg-white border border-natural-border/20 shadow-sm hover:border-natural-primary/50 transition-all group">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-10 h-10 rounded-2xl bg-natural-bg flex items-center justify-center text-natural-primary group-hover:bg-natural-primary group-hover:text-white transition-all">
+                <s.icon className="w-5 h-5" />
+              </div>
+              <h3 className="font-serif font-bold text-natural-heading m-0">{i + 1}. {s.title}</h3>
+            </div>
+            <p className="text-xs text-[#6b6b54] leading-relaxed m-0">{s.content}</p>
           </div>
         ))}
       </div>
 
-      <h2>Understanding the Academic Cycle</h2>
-      <p>
-        The transition to university life brings a significant shift in academic demands and social dynamics. Especially for RIT Dubai students, managing technical "Midterm Madness" requires systematic planning.
-      </p>
-
-      <blockquote>
-        "Your mental health is just as important as your GPA. In fact, one often sustains the other."
-      </blockquote>
-
-      <h2>Actionable Resources</h2>
-      <p>
-        RIT Dubai provides dedicated counseling services via student affairs. Isolation is the primary driver of prolonged burnout; we encourage all students to utilize the "Peer Network" listed in our sidebar.
-      </p>
+      <div className="bg-rit-orange/5 border border-rit-orange/20 rounded-[32px] p-8 mt-12">
+        <h3 className="text-rit-orange font-serif font-bold flex items-center gap-2 mb-4">
+          <HelpCircle className="w-5 h-5" /> When to Seek Help
+        </h3>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 list-none p-0">
+          <li className="text-xs bg-white/50 p-3 rounded-xl border border-rit-orange/10 italic">"Stress affects sleep for long periods"</li>
+          <li className="text-xs bg-white/50 p-3 rounded-xl border border-rit-orange/10 italic">"You feel constantly overwhelmed"</li>
+          <li className="text-xs bg-white/50 p-3 rounded-xl border border-rit-orange/10 italic">"You lose motivation completely"</li>
+          <li className="text-xs bg-white/50 p-3 rounded-xl border border-rit-orange/10 italic">"Anxiety affects daily functioning"</li>
+        </ul>
+      </div>
     </>
   );
 }
@@ -292,6 +396,9 @@ function ResearchSection() {
           </p>
           <p className="pl-8 -indent-8 border-l-2 border-natural-primary/10 ml-2">
             Mayo Clinic. (2025). <i>Mindfulness exercises: How to get started.</i> http://www.mayoclinic.org/healthy-lifestyle/stress-management
+          </p>
+          <p className="pl-8 -indent-8 border-l-2 border-natural-primary/10 ml-2">
+            Steinthal, J. (2016). <i>Student Sleep Patterns and Academic Performance.</i> University Academic Press.
           </p>
         </div>
       </div>
@@ -356,4 +463,5 @@ function TeamReflection() {
     </>
   );
 }
+
 
