@@ -361,21 +361,28 @@ function AudienceAnalysis() {
       <div className="bg-natural-accent rounded-3xl p-8 my-8 border border-natural-primary/5">
         <h3 className="text-xs font-bold uppercase tracking-widest text-natural-primary mb-4 italic">Analysis Context</h3>
         <p className="text-sm m-0">
-          To ensure our Wiki is effective, we conducted an audience analysis specifically targeting the RIT student body. We prioritized technical clarity and actionable brevity.
+          To understand our audience at RIT Dubai, we utilized informal discussions, workload observations, and academic research to ensure the wiki addresses real student challenges.
         </p>
       </div>
       
-      <h2>Demographics & Context</h2>
+      <h2>Target Audience Identification</h2>
       <ul className="list-none p-0">
-        <li><strong>Primary Audience:</strong> Full-time RIT Dubai undergraduate students (Ages 18–24).</li>
-        <li><strong>Context:</strong> High-stress technical background (Engineering, Computing, Business).</li>
-        <li><strong>Language:</strong> Standard formal English, as per Learning Outcome 1.</li>
+        <li><strong>Primary Audience:</strong> Students at RIT Dubai aged 18–24 facing academic pressure and deadlines.</li>
+        <li><strong>Secondary Audience:</strong> Instructors reviewing the wiki for educational quality and effectiveness.</li>
       </ul>
 
-      <h2>Informational Needs</h2>
+      <h2>Audience Needs</h2>
       <p>
-        Survey data indicated that RIT students value <strong>efficiency</strong>. They prefer bulleted coping tools over clinical psychological theories.
+        Our analysis identified that students require <strong>simple, clear information</strong> (not overly technical) with practical strategies and <strong>quick readability</strong> through bullet points and visual support.
       </p>
+
+      <h2>Influence on Design</h2>
+      <ul>
+        <li>Simple and easily understandable language.</li>
+        <li>Information broken into short sections and bullet points.</li>
+        <li>Visuals added to improve conceptual understanding.</li>
+        <li>Structure designed for quick scanning and navigation.</li>
+      </ul>
     </>
   );
 }
@@ -385,31 +392,46 @@ function ResearchSection() {
     <>
       <h1>Research & Bibliography</h1>
       <p>
-        Grounded in Learning Outcome 6, this content is derived from credible academic sources, with formatting strictly following APA 7th Edition guidelines.
+        A range of credible academic, medical, and governmental sources were analyzed to ensure all content is evidence-based and reliable.
       </p>
 
-      <div className="bg-white p-8 rounded-[32px] border border-natural-border/30 my-10 font-sans text-sm shadow-inner bg-natural-bg/10">
-        <h4 className="font-serif font-bold mb-6 text-natural-heading italic border-b border-natural-border pb-3">References</h4>
-        <div className="space-y-6 text-[#5d5d4d] leading-relaxed">
-          <p className="pl-8 -indent-8 border-l-2 border-natural-primary/10 ml-2">
-            American Psychological Association. (2024). <i>Stress management for high-achieving university students.</i> http://www.apa.org/topics/student-stress
-          </p>
-          <p className="pl-8 -indent-8 border-l-2 border-natural-primary/10 ml-2">
-            Mayo Clinic. (2025). <i>Mindfulness exercises: How to get started.</i> http://www.mayoclinic.org/healthy-lifestyle/stress-management
-          </p>
-          <p className="pl-8 -indent-8 border-l-2 border-natural-primary/10 ml-2">
-            Steinthal, J. (2016). <i>Student Sleep Patterns and Academic Performance.</i> University Academic Press.
-          </p>
-        </div>
-      </div>
-
-      <h2>Evaluation Metrics</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {["Authority", "Currency", "Credibility"].map(metric => (
-          <div key={metric} className="p-4 bg-white rounded-2xl border border-natural-border/40 text-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-natural-primary">{metric}</span>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+        {[
+          "Academic stress negatively affects concentration and performance.",
+          "Lack of sleep increases anxiety and reduces productivity.",
+          "Time management significantly improves academic outcomes.",
+          "Physical activity improves mental health and focus.",
+          "Excessive screen time contributes to mental fatigue.",
+        ].map((finding, i) => (
+          <div key={i} className="flex gap-3 p-4 bg-white border border-natural-border/30 rounded-2xl text-xs text-[#5d5d4d]">
+            <CheckCircle2 className="w-4 h-4 text-natural-primary shrink-0" />
+            {finding}
           </div>
         ))}
+      </div>
+
+      <div className="bg-white p-8 rounded-[32px] border border-natural-border/30 my-10 font-sans text-xs shadow-inner bg-natural-bg/10">
+        <h4 className="font-serif font-bold mb-6 text-natural-heading italic border-b border-natural-border pb-3">Bibliography</h4>
+        <div className="space-y-4 text-[#5d5d4d] leading-relaxed">
+          <p className="pl-8 -indent-8">
+            American Psychological Association. (2023). <i>Stress effects on the body.</i> https://www.apa.org/topics/stress/body
+          </p>
+          <p className="pl-8 -indent-8">
+            Harvard Health Publishing. (2021). <i>Understanding the stress response.</i> https://www.health.harvard.edu/staying-healthy/understanding-the-stress-response
+          </p>
+          <p className="pl-8 -indent-8">
+            National Institute of Mental Health. (2023). <i>Coping with stress.</i> https://www.nimh.nih.gov/health/topics/coping-with-stress
+          </p>
+          <p className="pl-8 -indent-8">
+            Pérez-Jorge, D., et al. (2025). <i>Examining the effects of academic stress on student well-being.</i> Humanities and Social Sciences Communications.
+          </p>
+          <p className="pl-8 -indent-8">
+            Steinthal, D. (2016). <i>Academic anxiety: Where to draw the line.</i> The Oracle.
+          </p>
+          <p className="pl-8 -indent-8">
+            World Health Organization. (2022). <i>Adolescent mental health.</i> https://www.who.int/news-room/fact-sheets/detail/adolescent-mental-health
+          </p>
+        </div>
       </div>
     </>
   );
@@ -419,16 +441,17 @@ function TeamRoles() {
   return (
     <>
       <h1>Team Roles & Responsibilities</h1>
-      <p>Strategic workload distribution based on individual technical communication strengths.</p>
+      <p>Our group collaborated using WhatsApp and Google Docs to ensure real-time communication and consistency across all sections.</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
         {[
-          { name: "Student 1", role: "Project Lead", desc: "Managed timelines and final APA document formatting." },
-          { name: "Student 2", role: "UI Designer", desc: "Developed the Wiki structure and accessibility layers." },
-          { name: "Student 3", role: "Researcher", desc: "Conducted audience analysis and gathered verified sources." },
-          { name: "Student 4", role: "Writer", desc: "Authored the stress management content and coping tips." },
+          { name: "Ifzaan", role: "Audience Analysis & Intro", desc: "Conducted audience research and summarized key findings to shape the wiki's readability." },
+          { name: "Faizah", role: "Research specialist", desc: "Selected and filtered credible sources from health organizations to ensure accuracy." },
+          { name: "Swati", role: "Content Architect", desc: "Structured the wiki content, focused on causes, effects, and practical management strategies." },
+          { name: "Zain", role: "Visual & UI Designer", desc: "Selected imagery and ensured proper formatting, accessibility, and visual-text integration." },
+          { name: "Jagadip", role: "Editor & Quality Lead", desc: "Reviewed the entire wiki for grammar, consistency, and professional quality before publication." },
         ].map((member, i) => (
-          <div key={i} className="p-6 border border-natural-border/30 rounded-3xl bg-white hover:border-natural-primary transition-all group">
+          <div key={i} className={`p-6 border border-natural-border/30 rounded-3xl bg-white hover:border-natural-primary transition-all group ${i === 4 ? "md:col-span-2" : ""}`}>
             <h4 className="font-serif font-bold text-natural-heading group-hover:text-natural-primary transition-colors">{member.name}</h4>
             <div className="text-[10px] font-bold text-natural-primary/60 mb-3 uppercase tracking-tighter italic">{member.role}</div>
             <p className="text-xs text-slate-500 m-0 leading-relaxed italic">"{member.desc}"</p>
@@ -444,22 +467,36 @@ function TeamReflection() {
     <>
       <h1>Group Reflection</h1>
       
-      <h2>The Collaboration Process</h2>
+      <h2>Collaboration Process</h2>
       <p>
-        Our group utilized <strong>Slack</strong> for asynchronous communication and <strong>Zoom</strong> for weekly progress meetings. These tools enabled us to work collaboratively on writing projects as per LO 5.
+        The group collaborated using tools such as <strong>WhatsApp</strong> and <strong>Google Docs</strong> which allowed real-time communication and shared editing of content. Meetings were scheduled online due to different timetables which helped maintain flexibility. Each member was assigned a specific role, which helped in dividing a workload.
       </p>
+      <p>Overall the collaboration process was effective and most members contributed consistently throughout the project.</p>
 
-      <div className="p-8 bg-natural-sidebar rounded-[32px] my-10 border border-natural-border/20">
-        <h3 className="text-sm font-serif font-bold text-natural-heading mb-4 italic">Challenges & Resolutions</h3>
-        <p className="text-xs mb-0 leading-relaxed">
-          The primary obstacle was aligning disjointed writing voices. We created a "Style Guide" to ensure the tone across the wiki and report was uniform—professional, technical, yet accessible.
-        </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-10">
+        <div className="p-6 bg-natural-sidebar rounded-3xl border border-natural-border/20">
+          <h3 className="text-sm font-serif font-bold text-natural-heading mb-4 italic">Scheduling Conflicts</h3>
+          <p className="text-xs mb-0 leading-relaxed text-[#6b6b54]">
+            Resolved by switching to online meetings and using shared documents for progress tracking when physical meetings were difficult to arrange.
+          </p>
+        </div>
+        <div className="p-6 bg-natural-accent rounded-3xl border border-natural-primary/5">
+          <h3 className="text-sm font-serif font-bold text-natural-heading mb-4 italic">Writing Consistency</h3>
+          <p className="text-xs mb-0 leading-relaxed text-[#6b6b54]">
+            Ensuring a uniform writing style was solved through iterative group editing and final proofreading by a designated member (Jagadip).
+          </p>
+        </div>
       </div>
 
-      <h2>Future Performance</h2>
+      <h2>Reflection and Improvements</h2>
       <p>
-        For subsequent technical documents, we aim to integrate more data-driven visuals using specialized charting tools to enhance the accessibility of the audience analysis section.
+        Overall, the group worked well together to meet the deadlines and maintain a high standard of technical writing.
       </p>
+      <div className="p-6 border-l-4 border-rit-orange bg-rit-orange/5 rounded-r-2xl">
+        <p className="text-xs italic m-0">
+          "For future projects, communication could have been more structured to avoid last-minute changes on the webpage, report, and final presentation."
+        </p>
+      </div>
     </>
   );
 }
