@@ -174,10 +174,9 @@ function IdentifyingStress() {
       
       <div className="mb-10 rounded-[40px] overflow-hidden border border-natural-border/20 shadow-sm bg-natural-sidebar">
         <img 
-          src="/input_file_0.png" 
+          src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=1200" 
           alt="Illustration of mental stress and digital overload" 
           className="w-full h-[300px] object-cover"
-          referrerPolicy="no-referrer"
         />
         <div className="p-4 text-center">
           <p className="text-[10px] text-[#8a8a70] italic m-0">Visualizing the weight of digital and academic expectations on modern students.</p>
@@ -247,10 +246,9 @@ function IdentifyingStress() {
         </div>
         <div className="w-full md:w-64 shrink-0 overflow-hidden rounded-2xl border border-natural-border/30 shadow-sm">
           <img 
-            src="/input_file_2.png" 
+            src="https://images.unsplash.com/photo-1506784926709-22f1ec395907?auto=format&fit=crop&q=80&w=800" 
             alt="Hourglass representing time pressure" 
             className="w-full h-48 object-cover"
-            referrerPolicy="no-referrer"
           />
         </div>
       </div>
@@ -347,10 +345,9 @@ function CopingStrategies() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
         <div className="rounded-[32px] overflow-hidden border border-natural-border/20 shadow-sm group">
           <img 
-            src="/input_file_3.png" 
+            src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&q=80&w=800" 
             alt="Peaceful sunset representing meditation" 
             className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700"
-            referrerPolicy="no-referrer"
           />
           <div className="p-4 bg-natural-sidebar">
             <h4 className="text-[10px] uppercase font-bold tracking-widest text-[#8a8a70] m-0 italic">Meditation & Presence</h4>
@@ -358,10 +355,9 @@ function CopingStrategies() {
         </div>
         <div className="rounded-[32px] overflow-hidden border border-natural-border/20 shadow-sm group">
           <img 
-            src="/input_file_4.png" 
+            src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=800" 
             alt="Group exercise activity" 
             className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700"
-            referrerPolicy="no-referrer"
           />
           <div className="p-4 bg-natural-accent">
             <h4 className="text-[10px] uppercase font-bold tracking-widest text-natural-primary m-0 italic">Active Stress Resolution</h4>
@@ -421,10 +417,9 @@ function AudienceAnalysis() {
         </div>
         <div className="w-full md:w-80 shrink-0 overflow-hidden rounded-[32px] border border-natural-border/30 shadow-sm relative grayscale hover:grayscale-0 transition-all duration-500">
           <img 
-            src="/input_file_1.png" 
+            src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=800" 
             alt="Overwhelmed student with reminders" 
             className="w-full h-64 object-cover"
-            referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-natural-primary/10 mix-blend-overlay"></div>
         </div>
