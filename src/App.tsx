@@ -172,6 +172,18 @@ function IdentifyingStress() {
     <>
       <h1 className="mb-8">Mental Health & Stress Management for Students</h1>
       
+      <div className="mb-10 rounded-[40px] overflow-hidden border border-natural-border/20 shadow-sm bg-natural-sidebar">
+        <img 
+          src="/input_file_0.png" 
+          alt="Illustration of mental stress and digital overload" 
+          className="w-full h-[300px] object-cover"
+          referrerPolicy="no-referrer"
+        />
+        <div className="p-4 text-center">
+          <p className="text-[10px] text-[#8a8a70] italic m-0">Visualizing the weight of digital and academic expectations on modern students.</p>
+        </div>
+      </div>
+
       <h2>Introduction</h2>
       <p>
         Stress is a common experience among university students caused by academic pressure, deadlines, and personal responsibilities. While some stress can improve performance, excessive stress can negatively affect both mental and physical health.
@@ -223,18 +235,25 @@ function IdentifyingStress() {
         </div>
       </div>
 
-      <h2>Sleep and Academic Stress</h2>
-      <p>
-        Research indicates a strong link between sleep patterns and academic stress. According to student data, the majority of students do not meet the recommended sleep requirements.
-      </p>
-      <p>
-        A study by <strong>Steinthal (2016)</strong> shows that:
-      </p>
-      <ul>
-        <li><strong>55%</strong> of students sleep 6 hours or less per night.</li>
-        <li>Only a small percentage achieve recommended sleep levels.</li>
-        <li>Sleep deprivation increases stress, anxiety, and reduces academic performance.</li>
-      </ul>
+      <div className="flex flex-col md:flex-row gap-8 items-center bg-natural-bg/10 p-8 rounded-[32px] my-10 border border-natural-border/20">
+        <div className="flex-1">
+          <h2>Sleep and Academic Stress</h2>
+          <p>
+            Research indicates a strong link between sleep patterns and academic stress. According to student data, the majority of students do not meet the recommended sleep requirements.
+          </p>
+          <p>
+            A study by <strong>Steinthal (2016)</strong> shows that 55% of students sleep 6 hours or less per night, directly increasing anxiety and reducing academic performance.
+          </p>
+        </div>
+        <div className="w-full md:w-64 shrink-0 overflow-hidden rounded-2xl border border-natural-border/30 shadow-sm">
+          <img 
+            src="/input_file_2.png" 
+            alt="Hourglass representing time pressure" 
+            className="w-full h-48 object-cover"
+            referrerPolicy="no-referrer"
+          />
+        </div>
+      </div>
 
       <div className="my-12 p-8 bg-white border border-natural-border/30 rounded-[32px] shadow-sm flex flex-col items-center">
         <h4 className="text-sm font-serif font-bold text-natural-heading mb-2">Figure 1: Student Sleep Patterns</h4>
@@ -320,16 +339,48 @@ function CopingStrategies() {
 
   return (
     <>
-      <h1>Stress Management Strategies for Students</h1>
+      <h1 className="mb-6">Stress Management Strategies for Students</h1>
       <p className="mb-10 text-lg text-natural-primary/70">
         Empowering yourself with the right tools is essential for maintaining balance during high-pressure academic cycles.
       </p>
 
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
+        <div className="rounded-[32px] overflow-hidden border border-natural-border/20 shadow-sm group">
+          <img 
+            src="/input_file_3.png" 
+            alt="Peaceful sunset representing meditation" 
+            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700"
+            referrerPolicy="no-referrer"
+          />
+          <div className="p-4 bg-natural-sidebar">
+            <h4 className="text-[10px] uppercase font-bold tracking-widest text-[#8a8a70] m-0 italic">Meditation & Presence</h4>
+          </div>
+        </div>
+        <div className="rounded-[32px] overflow-hidden border border-natural-border/20 shadow-sm group">
+          <img 
+            src="/input_file_4.png" 
+            alt="Group exercise activity" 
+            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700"
+            referrerPolicy="no-referrer"
+          />
+          <div className="p-4 bg-natural-accent">
+            <h4 className="text-[10px] uppercase font-bold tracking-widest text-natural-primary m-0 italic">Active Stress Resolution</h4>
+          </div>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
         {strategies.map((s, i) => (
-          <div key={i} className="p-6 rounded-3xl bg-white border border-natural-border/20 shadow-sm hover:border-natural-primary/50 transition-all group">
+          <div 
+            key={i} 
+            className={`p-6 rounded-3xl border shadow-sm transition-all group hover:scale-[1.02] ${
+              i % 2 === 0 
+                ? "bg-natural-sidebar border-natural-border/20 shadow-sm hover:border-natural-primary/50" 
+                : "bg-natural-accent border-natural-primary/5 shadow-sm hover:border-natural-primary/50"
+            }`}
+          >
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-10 h-10 rounded-2xl bg-natural-bg flex items-center justify-center text-natural-primary group-hover:bg-natural-primary group-hover:text-white transition-all">
+              <div className="w-10 h-10 rounded-2xl bg-white flex items-center justify-center text-natural-primary group-hover:bg-natural-primary group-hover:text-white transition-all shadow-sm">
                 <s.icon className="w-5 h-5" />
               </div>
               <h3 className="font-serif font-bold text-natural-heading m-0">{i + 1}. {s.title}</h3>
@@ -357,12 +408,26 @@ function CopingStrategies() {
 function AudienceAnalysis() {
   return (
     <>
-      <h1>Audience Analysis Profile</h1>
-      <div className="bg-natural-accent rounded-3xl p-8 my-8 border border-natural-primary/5">
-        <h3 className="text-xs font-bold uppercase tracking-widest text-natural-primary mb-4 italic">Analysis Context</h3>
-        <p className="text-sm m-0">
-          To understand our audience at RIT Dubai, we utilized informal discussions, workload observations, and academic research to ensure the wiki addresses real student challenges.
-        </p>
+      <h1 className="mb-8">Audience Analysis Profile</h1>
+      
+      <div className="flex flex-col md:flex-row gap-8 items-center border-b border-natural-border/10 pb-10 mb-10">
+        <div className="flex-1">
+          <div className="bg-natural-accent rounded-3xl p-8 border border-natural-primary/5">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-natural-primary mb-4 italic">Analysis Context</h3>
+            <p className="text-sm m-0">
+              To understand our audience at RIT Dubai, we utilized informal discussions, workload observations, and academic research to ensure the wiki addresses real student challenges.
+            </p>
+          </div>
+        </div>
+        <div className="w-full md:w-80 shrink-0 overflow-hidden rounded-[32px] border border-natural-border/30 shadow-sm relative grayscale hover:grayscale-0 transition-all duration-500">
+          <img 
+            src="/input_file_1.png" 
+            alt="Overwhelmed student with reminders" 
+            className="w-full h-64 object-cover"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 bg-natural-primary/10 mix-blend-overlay"></div>
+        </div>
       </div>
       
       <h2>Target Audience Identification</h2>
@@ -377,12 +442,26 @@ function AudienceAnalysis() {
       </p>
 
       <h2>Influence on Design</h2>
-      <ul>
-        <li>Simple and easily understandable language.</li>
-        <li>Information broken into short sections and bullet points.</li>
-        <li>Visuals added to improve conceptual understanding.</li>
-        <li>Structure designed for quick scanning and navigation.</li>
-      </ul>
+      <div className="p-8 bg-natural-sidebar rounded-[32px] border border-natural-border/20 my-8">
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 m-0">
+          <li className="flex items-start gap-2 text-xs">
+            <span className="w-1.5 h-1.5 bg-natural-primary rounded-full mt-1.5 shrink-0"></span>
+            Simple and easily understandable language.
+          </li>
+          <li className="flex items-start gap-2 text-xs">
+            <span className="w-1.5 h-1.5 bg-natural-primary rounded-full mt-1.5 shrink-0"></span>
+            Information broken into short sections and bullet points.
+          </li>
+          <li className="flex items-start gap-2 text-xs">
+            <span className="w-1.5 h-1.5 bg-natural-primary rounded-full mt-1.5 shrink-0"></span>
+            Visuals added to improve conceptual understanding.
+          </li>
+          <li className="flex items-start gap-2 text-xs">
+            <span className="w-1.5 h-1.5 bg-natural-primary rounded-full mt-1.5 shrink-0"></span>
+            Structure designed for quick scanning and navigation.
+          </li>
+        </ul>
+      </div>
     </>
   );
 }
@@ -403,15 +482,25 @@ function ResearchSection() {
           "Physical activity improves mental health and focus.",
           "Excessive screen time contributes to mental fatigue.",
         ].map((finding, i) => (
-          <div key={i} className="flex gap-3 p-4 bg-white border border-natural-border/30 rounded-2xl text-xs text-[#5d5d4d]">
+          <div 
+            key={i} 
+            className={`flex gap-3 p-4 border rounded-2xl text-xs text-[#5d5d4d] transition-all hover:scale-[1.02] ${
+              i % 2 === 0 
+                ? "bg-natural-sidebar border-natural-border/30" 
+                : "bg-natural-accent border-natural-primary/5"
+            }`}
+          >
             <CheckCircle2 className="w-4 h-4 text-natural-primary shrink-0" />
             {finding}
           </div>
         ))}
       </div>
 
-      <div className="bg-white p-8 rounded-[32px] border border-natural-border/30 my-10 font-sans text-xs shadow-inner bg-natural-bg/10">
-        <h4 className="font-serif font-bold mb-6 text-natural-heading italic border-b border-natural-border pb-3">Bibliography</h4>
+      <div className="bg-white p-8 rounded-[32px] border border-natural-border/30 my-10 font-sans text-xs shadow-sm">
+        <div className="flex items-center gap-2 mb-6 border-b border-natural-border pb-3">
+          <BookOpen className="w-4 h-4 text-natural-primary" />
+          <h4 className="font-serif font-bold text-natural-heading italic m-0">Full Bibliography</h4>
+        </div>
         <div className="space-y-4 text-[#5d5d4d] leading-relaxed">
           <p className="pl-8 -indent-8">
             American Psychological Association. (2023). <i>Stress effects on the body.</i> https://www.apa.org/topics/stress/body
@@ -438,20 +527,31 @@ function ResearchSection() {
 }
 
 function TeamRoles() {
+  const memberData = [
+    { name: "Ifzaan", role: "Audience Analysis & Intro", desc: "Conducted audience research and summarized key findings to shape the wiki's readability." },
+    { name: "Faizah", role: "Research specialist", desc: "Selected and filtered credible sources from health organizations to ensure accuracy." },
+    { name: "Swati", role: "Content Architect", desc: "Structured the wiki content, focused on causes, effects, and practical management strategies." },
+    { name: "Zain", role: "Visual & UI Designer", desc: "Selected imagery and ensured proper formatting, accessibility, and visual-text integration." },
+    { name: "Jagadip", role: "Editor & Quality Lead", desc: "Reviewed the entire wiki for grammar, consistency, and professional quality before publication." },
+  ];
+
   return (
     <>
       <h1>Team Roles & Responsibilities</h1>
       <p>Our group collaborated using WhatsApp and Google Docs to ensure real-time communication and consistency across all sections.</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-        {[
-          { name: "Ifzaan", role: "Audience Analysis & Intro", desc: "Conducted audience research and summarized key findings to shape the wiki's readability." },
-          { name: "Faizah", role: "Research specialist", desc: "Selected and filtered credible sources from health organizations to ensure accuracy." },
-          { name: "Swati", role: "Content Architect", desc: "Structured the wiki content, focused on causes, effects, and practical management strategies." },
-          { name: "Zain", role: "Visual & UI Designer", desc: "Selected imagery and ensured proper formatting, accessibility, and visual-text integration." },
-          { name: "Jagadip", role: "Editor & Quality Lead", desc: "Reviewed the entire wiki for grammar, consistency, and professional quality before publication." },
-        ].map((member, i) => (
-          <div key={i} className={`p-6 border border-natural-border/30 rounded-3xl bg-white hover:border-natural-primary transition-all group ${i === 4 ? "md:col-span-2" : ""}`}>
+        {memberData.map((member, i) => (
+          <div 
+            key={i} 
+            className={`p-6 border rounded-3xl transition-all group hover:border-natural-primary shadow-sm hover:shadow-md ${
+              i === 4 ? "md:col-span-2" : ""
+            } ${
+              i % 2 === 0 
+                ? "bg-natural-sidebar border-natural-border/20" 
+                : "bg-natural-accent border-natural-primary/5"
+            }`}
+          >
             <h4 className="font-serif font-bold text-natural-heading group-hover:text-natural-primary transition-colors">{member.name}</h4>
             <div className="text-[10px] font-bold text-natural-primary/60 mb-3 uppercase tracking-tighter italic">{member.role}</div>
             <p className="text-xs text-slate-500 m-0 leading-relaxed italic">"{member.desc}"</p>
